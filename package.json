@@ -32,7 +32,6 @@
   "dependencies": {
     "@mdx-js/esbuild": "3.0.0",
     "esbuild": "0.19.5",
-    "feather-icons": "4.29.1",
     "front-matter": "4.0.2",
     "html-minifier": "4.0.0",
     "preact": "10.19.3",
