@@ -27,7 +27,7 @@ export const bundleMdx = async ({
 
       // Importing these files in js returns a filename with hash
       '.ce.js': 'file',
-      '.css': 'file',
+      '.ce.css': 'file',
       '.ico': 'file',
       '.jpg': 'file',
       '.svg': 'file',

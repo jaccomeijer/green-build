@@ -8,6 +8,7 @@ const config = {
     l: 1000,
   },
   outdir: 'dist',
+  removeBundle: true,
   serve: true,
   stripFromOutputPath: 'test',
 }
