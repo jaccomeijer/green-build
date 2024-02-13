@@ -1,6 +1,6 @@
 {
   "name": "@jaccomeijer/green-build",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "MDX build setup for esbuild",
   "keywords": [
     "esbuild",
