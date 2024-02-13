@@ -1,14 +1,9 @@
 import glob from 'tiny-glob'
-import path from 'path'
 
 import { bundleMdx } from './bundle-mdx.js'
 import { getPageList } from './get-page-list.js'
 
-export const build = async configFile => {
-  const configPath = path.resolve(configFile || 'mdx-site-config.js')
-  const mdxSiteConfig = await import(configPath)
-  const configKey = process.argv[2] || 'pages'
-  const config = mdxSiteConfig.default[configKey]
+export const build = async config => {
 
   // Config defaults
   const entryPointsGlob = config.entryPointsGlob || 'src/pages/**/*.{mdx}'
