@@ -33,6 +33,7 @@ export const bundleMdx = async ({
     },
     metafile: true,
     outdir,
+    platform: 'node',
     write: true,
     plugins: [
       mdx({
