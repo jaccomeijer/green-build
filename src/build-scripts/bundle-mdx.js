@@ -34,7 +34,6 @@ export const bundleMdx = async ({
     metafile: true,
     outdir,
     platform: 'node',
-    write: true,
     plugins: [
       mdx({
         jsxImportSource: 'preact',
@@ -54,6 +53,7 @@ export const bundleMdx = async ({
       bundleCssPlugin,
       resizeImagePlugin({ sizes: initialProps.imageSizes }),
     ],
+    write: true,
   })
 
   return ctx

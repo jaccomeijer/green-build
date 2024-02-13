@@ -36,8 +36,8 @@ export const renderJsxPlugin = options => {
         page.bundlePath = bundlePath
 
         const cacheBust = crypto.randomBytes(6).toString('hex')
-        const module = await import(path.resolve(`./${bundlePath}?v=${cacheBust}`))
-
+        const modulePath = path.resolve(`./${bundlePath}?v=${cacheBust}`)
+        const module = await import(modulePath)
         let html = `<p>No default export in: ${bundlePath}</p>`
 
         // Check if the default export is a function
