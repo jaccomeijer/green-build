@@ -59,6 +59,7 @@ export const renderJsxPlugin = options => {
         await mkdir(path.resolve(page.outputDir), { recursive: true })
         await writeFile(path.resolve(page.outputPath), `<!DOCTYPE html>${minifiedHtml}`)
         if (options.removeBundle) {
+          console.log('Removing', page.bundlePath)
           await rm(page.bundlePath)
         }
       }

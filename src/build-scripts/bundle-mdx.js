@@ -13,6 +13,7 @@ export const bundleMdx = async ({
   entryPoints,
   initialProps,
   outdir,
+  removeBundle,
 }) => {
   const ctx = await context({
     bundle: true,
@@ -48,7 +49,7 @@ export const bundleMdx = async ({
         stripFromOutputPath,
         initialProps,
         outdir,
-        removeBundle: true,
+        removeBundle,
       }),
       bundleCssPlugin,
       resizeImagePlugin({ sizes: initialProps.imageSizes }),

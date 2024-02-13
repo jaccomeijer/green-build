@@ -36,6 +36,7 @@ export const build = async config => {
     entryPoints,
     initialProps,
     outdir,
+    removeBundle: config.removeBundle,
   })
 
   if (serve) {
