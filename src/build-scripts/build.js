@@ -3,51 +3,52 @@ import glob from 'tiny-glob'
 import { bundleMdx } from './bundle-mdx.js'
 import { getPageList } from './get-page-list.js'
 
-const addKeyIfNotExists = ({ obj, key, defaultValue }) => {
+const IMAGE_SIZES = {
+  s: 300,
+  m: 700,
+  l: 1000,
+}
+
+const assertKeyValue = ({ obj, key, defaultValue }) => {
   if (!obj[key]) {
     obj[key] = defaultValue
   }
 }
 
 export const build = async config => {
+  assertKeyValue({ obj: config, key: 'entryPointsGlob', defaultValue: 'src/pages/**/*.{mdx}' })
+  assertKeyValue({ obj: config, key: 'initialProps', defaultValue: {} })
+  assertKeyValue({ obj: config, key: 'outdir', defaultValue: 'dist' })
+  assertKeyValue({ obj: config, key: 'removeBundle', defaultValue: false })
+  assertKeyValue({ obj: config, key: 'serve', defaultValue: false })
+  assertKeyValue({ obj: config, key: 'stripFromOutputPath', defaultValue: 'src/pages' })
 
-  // Config defaults
-  const entryPointsGlob = config.entryPointsGlob || 'src/pages/**/*.{mdx}'
-  const initialProps = config.initialProps || {}
-  const outdir = config.outdir || 'dist'
-  const serve = config.serve || false
-  const stripFromOutputPath = config.stripFromOutputPath || 'src/pages'
+  assertKeyValue({ obj: config.initialProps, key: 'assetUrlPrefix', defaultValue: '' })
+  assertKeyValue({ obj: config.initialProps, key: 'imageSizes', defaultValue: IMAGE_SIZES })
+  assertKeyValue({ obj: config.initialProps, key: 'metadata', defaultValue: {} })
 
-  const defaultImageSizes = {
-    s: 300,
-    m: 700,
-    l: 1000,
+  const entryPoints = await glob(config.entryPointsGlob)
+
+  config.initialProps.pages = await getPageList({
+    stripFromOutputPath: config.stripFromOutputPath,
+    entryPoints,
+    outdir: config.outdir,
+  })
+
+  const bundleConfig = {
+    entryPoints,
+    initialProps: config.initialProps,
+    outdir: config.outdir,
+    removeBundle: config.removeBundle,
+    stripFromOutputPath: config.stripFromOutputPath,
   }
 
-  addKeyIfNotExists({ obj: initialProps, key: 'assetUrlPrefix', defaultValue: '' })
-  addKeyIfNotExists({ obj: initialProps, key: 'imageSizes', defaultValue: defaultImageSizes })
-  addKeyIfNotExists({ obj: initialProps, key: 'metadata', defaultValue: {} })
+  const ctx = await bundleMdx(bundleConfig)
 
-  const entryPoints = await glob(entryPointsGlob)
-
-  initialProps.pages = await getPageList({
-    stripFromOutputPath,
-    entryPoints,
-    outdir,
-  })
-
-  const ctx = await bundleMdx({
-    stripFromOutputPath,
-    entryPoints,
-    initialProps,
-    outdir,
-    removeBundle: config.removeBundle,
-  })
-
-  if (serve) {
+  if (config.serve) {
     await ctx.watch()
     const { port } = await ctx.serve({
-      servedir: outdir,
+      servedir: config.outdir,
     })
 
     console.log(`Live reload server started at http://localhost:${port}\n`)

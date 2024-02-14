@@ -9,11 +9,11 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
 import remarkGfm from 'remark-gfm'
 
 export const bundleMdx = async ({
-  stripFromOutputPath,
   entryPoints,
   initialProps,
   outdir,
   removeBundle,
+  stripFromOutputPath,
 }) => {
   const ctx = await context({
     bundle: true,
