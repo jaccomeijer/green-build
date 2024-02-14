@@ -3,33 +3,38 @@ import glob from 'tiny-glob'
 import { bundleMdx } from './bundle-mdx.js'
 import { getPageList } from './get-page-list.js'
 
+const addKeyIfNotExists = ({ obj, key, defaultValue }) => {
+  if (!obj[key]) {
+    obj[key] = defaultValue
+  }
+}
+
 export const build = async config => {
 
   // Config defaults
   const entryPointsGlob = config.entryPointsGlob || 'src/pages/**/*.{mdx}'
+  const initialProps = config.initialProps || {}
   const outdir = config.outdir || 'dist'
-  const imageSizes = config.imageSizes || {
+  const serve = config.serve || false
+  const stripFromOutputPath = config.stripFromOutputPath || 'src/pages'
+
+  const defaultImageSizes = {
     s: 300,
     m: 700,
     l: 1000,
   }
-  const stripFromOutputPath = config.stripFromOutputPath || 'src/pages'
-  const serve = config.serve || false
-  const metadata = config.metadata || {}
+
+  addKeyIfNotExists({ obj: initialProps, key: 'assetUrlPrefix', defaultValue: '' })
+  addKeyIfNotExists({ obj: initialProps, key: 'imageSizes', defaultValue: defaultImageSizes })
+  addKeyIfNotExists({ obj: initialProps, key: 'metadata', defaultValue: {} })
 
   const entryPoints = await glob(entryPointsGlob)
 
-  const pages = await getPageList({
+  initialProps.pages = await getPageList({
     stripFromOutputPath,
     entryPoints,
     outdir,
   })
-
-  const initialProps = {
-    imageSizes,
-    pages,
-    metadata,
-  }
 
   const ctx = await bundleMdx({
     stripFromOutputPath,

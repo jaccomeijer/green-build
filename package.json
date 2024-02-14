@@ -19,8 +19,7 @@
   ],
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && node ./build.js",
-    "test": "npm run build && node test/build.js"
+    "build": "npm run clean && node ./build.js"
   },
   "homepage": "https://github.com/jaccomeijer/green-build#readme",
   "bugs": {
