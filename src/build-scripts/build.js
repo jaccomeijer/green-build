@@ -17,15 +17,12 @@ const assertKeyValue = ({ obj, key, defaultValue }) => {
 
 export const build = async config => {
   assertKeyValue({ obj: config, key: 'entryPointsGlob', defaultValue: 'src/pages/**/*.{mdx}' })
+  assertKeyValue({ obj: config, key: 'imageSizes', defaultValue: IMAGE_SIZES })
   assertKeyValue({ obj: config, key: 'initialProps', defaultValue: {} })
   assertKeyValue({ obj: config, key: 'outdir', defaultValue: 'dist' })
   assertKeyValue({ obj: config, key: 'removeBundle', defaultValue: false })
   assertKeyValue({ obj: config, key: 'serve', defaultValue: false })
   assertKeyValue({ obj: config, key: 'stripFromOutputPath', defaultValue: 'src/pages' })
-
-  assertKeyValue({ obj: config.initialProps, key: 'assetUrlPrefix', defaultValue: '' })
-  assertKeyValue({ obj: config.initialProps, key: 'imageSizes', defaultValue: IMAGE_SIZES })
-  assertKeyValue({ obj: config.initialProps, key: 'metadata', defaultValue: {} })
 
   const entryPoints = await glob(config.entryPointsGlob)
 
@@ -37,6 +34,7 @@ export const build = async config => {
 
   const bundleConfig = {
     entryPoints,
+    imageSizes: config.imageSizes,
     initialProps: config.initialProps,
     outdir: config.outdir,
     removeBundle: config.removeBundle,

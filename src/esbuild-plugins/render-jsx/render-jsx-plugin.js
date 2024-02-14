@@ -13,7 +13,10 @@ const pluginName = 'renderJsxPlugin'
  * rendered to html. The default export function from the bundle is called with
  * options.initialProps and a page object.
  */
-export const renderJsxPlugin = options => {
+export const renderJsxPlugin = ({
+  initialProps,
+  removeBundle,
+}) => {
   const setup = build => {
     build.onEnd(async result => {
       assert.strictEqual(build.initialOptions.bundle, true, 'Assert failed: bundle option must be true')
@@ -29,7 +32,6 @@ export const renderJsxPlugin = options => {
         if (!entryPoint) {
           continue
         }
-        const initialProps = options?.initialProps || {}
         const pages = initialProps?.pages || []
         const page = (pages.find(p => p.entryPoint === entryPoint)) || {}
 
@@ -44,11 +46,11 @@ export const renderJsxPlugin = options => {
         if (typeof module?.default !== 'function') {
           return
         }
-        const props = Object.assign(initialProps, { page })
 
         // Render the JSX component with props
-        console.log(`${pluginName}: ${page.outputPath}`)
+        const props = Object.assign(initialProps, { page })
 
+        console.log(`${pluginName}: ${page.outputPath}`)
         html = render(module.default(props))
 
         const minifiedHtml = minify(html, {
@@ -59,7 +61,7 @@ export const renderJsxPlugin = options => {
 
         await mkdir(path.resolve(page.outputDir), { recursive: true })
         await writeFile(path.resolve(page.outputPath), `<!DOCTYPE html>${minifiedHtml}`)
-        if (options.removeBundle) {
+        if (removeBundle) {
           await rm(page.bundlePath)
         }
       }

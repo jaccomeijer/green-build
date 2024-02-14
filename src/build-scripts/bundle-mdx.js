@@ -10,10 +10,10 @@ import remarkGfm from 'remark-gfm'
 
 export const bundleMdx = async ({
   entryPoints,
+  imageSizes,
   initialProps,
   outdir,
   removeBundle,
-  stripFromOutputPath,
 }) => {
   const ctx = await context({
     bundle: true,
@@ -47,12 +47,10 @@ export const bundleMdx = async ({
       }),
       renderJsxPlugin({
         initialProps,
-        outdir,
         removeBundle,
-        stripFromOutputPath,
       }),
       bundleCssPlugin,
-      resizeImagePlugin({ sizes: initialProps.imageSizes }),
+      resizeImagePlugin({ sizes: imageSizes }),
     ],
     write: true,
   })
