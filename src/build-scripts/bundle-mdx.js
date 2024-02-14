@@ -46,10 +46,10 @@ export const bundleMdx = async ({
         rehypePlugins: [rehypeHighlight],
       }),
       renderJsxPlugin({
-        stripFromOutputPath,
         initialProps,
         outdir,
         removeBundle,
+        stripFromOutputPath,
       }),
       bundleCssPlugin,
       resizeImagePlugin({ sizes: initialProps.imageSizes }),

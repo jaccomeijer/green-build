@@ -29,7 +29,7 @@ export const renderJsxPlugin = options => {
         if (!entryPoint) {
           continue
         }
-        const initialProps = options?.initialProps || []
+        const initialProps = options?.initialProps || {}
         const pages = initialProps?.pages || []
         const page = (pages.find(p => p.entryPoint === entryPoint)) || {}
 
@@ -48,6 +48,7 @@ export const renderJsxPlugin = options => {
 
         // Render the JSX component with props
         console.log(`${pluginName}: ${page.outputPath}`)
+
         html = render(module.default(props))
 
         const minifiedHtml = minify(html, {
