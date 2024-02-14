@@ -1,16 +1,15 @@
-## @jaccomeijer/green-build 1.0.7
+## @jaccomeijer/green-build 1.0.8
 
-## [1.0.7](https://github.com/jaccomeijer/green-build/compare/1.0.6...1.0.7) (2024-2-13)
+## [1.0.8](https://github.com/jaccomeijer/green-build/compare/1.0.7...1.0.8) (2024-2-14)
 
 
 ### Bug Fixes
 
-* remove browser script ([862b788](https://github.com/jaccomeijer/green-build/commit/862b788eee77cd1ce1ae7811022cb89158aa7963))
+* use .ce.css extension ([4f682e7](https://github.com/jaccomeijer/green-build/commit/4f682e7b396cf2a7f511e91695d4d3e4807c47c5))
 
 
 ### Commits
 
-* add test mdx ([74d89ae](https://github.com/jaccomeijer/green-build/commit/74d89ae450b854dece2e379b3d550a5fcfee1d3b))
-* solving esbuild require bug ([4ee3bba](https://github.com/jaccomeijer/green-build/commit/4ee3bbaa1c59d59bcea11803e26c8c4d46d5de1d))
+* add clean script ([2f2867d](https://github.com/jaccomeijer/green-build/commit/2f2867ddef19a2f273037ec47315673fa3d031fd))
 
 
