@@ -1,11 +1,15 @@
-## @jaccomeijer/green-build 1.1.0
+## @jaccomeijer/green-build 1.1.1
 
-## [1.1.0](https://github.com/jaccomeijer/green-build/compare/1.0.8...1.1.0) (2024-2-14)
+## [1.1.1](https://github.com/jaccomeijer/green-build/compare/1.1.0...1.1.1) (2024-2-14)
 
 
-### Features
+### Bug Fixes
 
-* add config.initialProps ([60f4c1c](https://github.com/jaccomeijer/green-build/commit/60f4c1c99c313e5a6aeb8f57a9b611b3e4f315cb))
-* add initialProps to config ([7a36b3a](https://github.com/jaccomeijer/green-build/commit/7a36b3a211bb32f79015f44215d037a35763be6e))
+* initialProps bug ([10d3436](https://github.com/jaccomeijer/green-build/commit/10d343651dc8979ed3363d503ac62c1f7fc1ea0f))
+
+
+### Commits
+
+* cleanup config and initialProps ([fda27e3](https://github.com/jaccomeijer/green-build/commit/fda27e36a8c95a538bd64f666da54a7ab37bf22e))
 
 
