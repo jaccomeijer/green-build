@@ -4,8 +4,8 @@ import { resizeImage } from './resize-image.js'
 const pluginName = 'resizeImagePlugin'
 
 /**
- * This plugin loops through all bundled files. When a file has the jpg
- * extension the plugin creates a copy of the image in webp format. For each
+ * This plugin loops through all bundled files. When a file has the jpg or the
+ * png extension the plugin creates a copy of the image in webp format. For each
  * size in the options.sizes object an image is created. The original path is
  * returned from the import. This path (e.g. path/file.jpg) can be used to
  * create a srcset (path/file-m.webp, path/file-l.webp, etc). 'm' and 'l' in
@@ -21,7 +21,7 @@ export const resizeImagePlugin = options => {
       for (const bundlePath of outputPaths) {
         const { ext } = path.parse(bundlePath)
 
-        if (['.jpg'].includes(ext)) {
+        if (['.jpg', '.png'].includes(ext)) {
 
           // Resize a file only once
           if (cache.get(bundlePath)) {

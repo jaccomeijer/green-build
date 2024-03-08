@@ -30,6 +30,7 @@ export const bundleMdx = async ({
       '.ce.css': 'file',
       '.ico': 'file',
       '.jpg': 'file',
+      '.png': 'file',
       '.svg': 'file',
     },
     metafile: true,
