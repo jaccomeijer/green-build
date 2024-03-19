@@ -1,10 +1,10 @@
-## @jaccomeijer/green-build 1.2.0
+## @jaccomeijer/green-build 1.2.1
 
-## [1.2.0](https://github.com/jaccomeijer/green-build/compare/1.1.1...1.2.0) (2024-3-8)
+## [1.2.1](https://github.com/jaccomeijer/green-build/compare/1.2.0...1.2.1) (2024-3-19)
 
 
-### Features
+### Commits
 
-* png image support ([9fdd3ac](https://github.com/jaccomeijer/green-build/commit/9fdd3ac59b565542a2df13439dc714096fa05057))
+* use central logger ([10cffc4](https://github.com/jaccomeijer/green-build/commit/10cffc458e9c7300cc59f51e8c11d5c7235e3f80))
 
 
