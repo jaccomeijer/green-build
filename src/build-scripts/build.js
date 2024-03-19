@@ -2,6 +2,7 @@ import glob from 'tiny-glob'
 
 import { bundleMdx } from './bundle-mdx.js'
 import { getPageList } from './get-page-list.js'
+import { logger } from './logger.js'
 
 const IMAGE_SIZES = {
   s: 300,
@@ -49,7 +50,8 @@ export const build = async config => {
       servedir: config.outdir,
     })
 
-    console.log(`Live reload server started at http://localhost:${port}\n`)
+    logger.log(`Live reload server started at http://localhost:${port}\n`)
+
   } else {
     await ctx.rebuild()
     ctx.dispose()

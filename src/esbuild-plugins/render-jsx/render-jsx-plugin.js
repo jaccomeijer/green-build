@@ -4,6 +4,7 @@ import crypto from 'crypto'
 import assert from 'node:assert'
 import { render } from 'preact-render-to-string'
 import { minify } from 'html-minifier'
+import { logger } from '../../build-scripts/logger.js'
 
 const pluginName = 'renderJsxPlugin'
 
@@ -42,16 +43,18 @@ export const renderJsxPlugin = ({
         const module = await import(modulePath)
         let html = `<p>No default export in: ${bundlePath}</p>`
 
+        logger.log(`${pluginName}: ${page.outputPath}`)
+
         // Check if the default export is a function
-        if (typeof module?.default !== 'function') {
-          return
+        if (typeof module?.default === 'function') {
+
+          // Render the JSX component with props
+          const props = Object.assign(initialProps, { page })
+
+          html = render(module.default(props))
+        } else {
+          logger.error(`No default export in: ${bundlePath}`)
         }
-
-        // Render the JSX component with props
-        const props = Object.assign(initialProps, { page })
-
-        console.log(`${pluginName}: ${page.outputPath}`)
-        html = render(module.default(props))
 
         const minifiedHtml = minify(html, {
           minifyCSS: true,

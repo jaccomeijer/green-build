@@ -1,5 +1,6 @@
 import path from 'path'
 import { resizeImage } from './resize-image.js'
+import { logger } from '../../build-scripts/logger.js'
 
 const pluginName = 'resizeImagePlugin'
 
@@ -27,7 +28,7 @@ export const resizeImagePlugin = options => {
           if (cache.get(bundlePath)) {
             continue
           }
-          console.log(`${pluginName}: ${bundlePath}`)
+          logger.log(`${pluginName}: ${bundlePath}`)
           await resizeImage({ inputPath: bundlePath, sizes: options.sizes })
           cache.set(bundlePath, true)
         }
