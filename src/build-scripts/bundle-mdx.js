@@ -22,7 +22,6 @@ export const bundleMdx = async ({
     entryPoints,
     format: 'esm',
     jsx: 'automatic',
-    jsxImportSource: 'preact',
     loader: {
 
       // Importing these files in js returns a filename with hash
@@ -35,10 +34,10 @@ export const bundleMdx = async ({
     },
     metafile: true,
     outdir,
+    packages: 'external',
     platform: 'node',
     plugins: [
       mdx({
-        jsxImportSource: 'preact',
         remarkPlugins: [
           [remarkGfm],
           [remarkFrontmatter, ['yaml', 'toml']],

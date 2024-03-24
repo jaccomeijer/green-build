@@ -2,9 +2,9 @@ import { writeFile, mkdir, rm } from 'fs/promises'
 import path from 'path'
 import crypto from 'crypto'
 import assert from 'node:assert'
-import { render } from 'preact-render-to-string'
 import { minify } from 'html-minifier'
 import { logger } from '../../build-scripts/logger.js'
+import { renderToString } from 'react-dom/server'
 
 const pluginName = 'renderJsxPlugin'
 
@@ -51,7 +51,7 @@ export const renderJsxPlugin = ({
           // Render the JSX component with props
           const props = Object.assign(initialProps, { page })
 
-          html = render(module.default(props))
+          html = renderToString(module.default(props))
         } else {
           logger.error(`No default export in: ${bundlePath}`)
         }

@@ -5,7 +5,6 @@ await build({
   entryPoints: ['./src/index.js'],
   format: 'esm',
   jsx: 'automatic',
-  jsxImportSource: 'preact',
   minify: true,
   outdir: 'dist',
   packages: 'external',
