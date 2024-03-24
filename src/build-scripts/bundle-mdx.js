@@ -34,7 +34,6 @@ export const bundleMdx = async ({
     },
     metafile: true,
     outdir,
-    packages: 'external',
     platform: 'node',
     plugins: [
       mdx({
