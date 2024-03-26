@@ -19,7 +19,9 @@
   ],
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && node ./build.js"
+    "build": "npm run clean && node ./build.js",
+    "test": "node --test src",
+    "test:watch": "node --test --watch src"
   },
   "homepage": "https://github.com/jaccomeijer/green-build#readme",
   "bugs": {
@@ -42,7 +44,8 @@
     "remark-gfm": "4.0.0",
     "remark-mdx-frontmatter": "4.0.0",
     "sharp": "0.33.2",
-    "tiny-glob": "0.2.9"
+    "tiny-glob": "0.2.9",
+    "xml": "1.0.1"
   },
   "devDependencies": {
     "eslint": "8.56.0",

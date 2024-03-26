@@ -3,6 +3,7 @@ import glob from 'tiny-glob'
 import { bundleMdx } from './bundle-mdx.js'
 import { getPageList } from './get-page-list.js'
 import { logger } from './logger.js'
+import { createSitemap } from '../sitemap/create-sitemap.js'
 
 const IMAGE_SIZES = {
   s: 300,
@@ -23,15 +24,23 @@ export const build = async config => {
   assertKeyValue({ obj: config, key: 'outdir', defaultValue: 'dist' })
   assertKeyValue({ obj: config, key: 'removeBundle', defaultValue: false })
   assertKeyValue({ obj: config, key: 'serve', defaultValue: false })
+  assertKeyValue({ obj: config, key: 'createSitemap', defaultValue: {} })
   assertKeyValue({ obj: config, key: 'stripFromOutputPath', defaultValue: 'src/pages' })
 
   const entryPoints = await glob(config.entryPointsGlob)
 
-  config.initialProps.pages = await getPageList({
+  const pages = await getPageList({
     stripFromOutputPath: config.stripFromOutputPath,
     entryPoints,
     outdir: config.outdir,
   })
+
+  config.initialProps.pages = pages
+
+  if (config.createSitemap.baseUrl && config.createSitemap.sitemapPath) {
+    console.log(`Creating sitemap: ${config.createSitemap.sitemapPath}`)
+    createSitemap({ pages, baseUrl: config.createSitemap.baseUrl, sitemapPath: config.createSitemap.sitemapPath })
+  }
 
   const bundleConfig = {
     entryPoints,
